@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RockIt!</title>
+	<meta charset = "utf-8">
+	<style type="text/css">
+	canvas {
+	    border:5px solid #696969;
+	    background-color: #181A21	;
+	    padding: 0;
+	    margin: auto;
+	    display: block;
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+
+	}
+	body {
+		background-color: black;
+	}
+	</style>
+</head>
+<body onload="startGame()">
+	<script>
+
+		function startGame() {
+		    myGameArea.start();
+		    myGamePiece = new component(30, 30, 20, "#2AA6A6");
+
+		}
+
+		var myGameArea = {
+		    canvas : document.createElement("canvas"),
+		    start : function() {
+		        this.canvas.width = 900;
+		        this.canvas.height = 550;
+		        this.context = this.canvas.getContext("2d");
+		        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+		    	this.interval = setInterval(updateGameArea, 20);
+		    },
+		    clear : function() {
+		        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		    }
+		}
+
+		function component(x, y, r ,  color) {
+		  
+		    this.x = x;
+		    this.y = y; 
+		    this.r = r;
+		    this.color = color;
+
+		    this.update = function(){
+		        ctx = myGameArea.context;
+		        ctx.beginPath();
+		        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+		        ctx.stroke();
+		        ctx.fillStyle = this.color;
+		        ctx.fill();
+		    }
+		}
+
+		function updateGameArea() {
+		    myGameArea.clear();
+		    myGamePiece.update();
+		}
+
+
+		    
+		
+
+	</script>
+</body>
+</html>
